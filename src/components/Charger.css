@@ -67,56 +67,58 @@ img {
 #spacing-row {
     height: 10px
 }
+
 .table td,
 .table th {
-  vertical-align: middle;
-  text-align: center;
+    vertical-align: middle;
+    text-align: center;
 }
 
 select.form-select:focus {
-  box-shadow: none;
-  border-color: #6c757d;
+    box-shadow: none;
+    border-color: #6c757d;
 }
 
 .table-container {
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
-  }
-  
-  .table th,
-  .table td {
+}
+
+.table th,
+.table td {
     vertical-align: middle;
-  }
-  
-  select.form-select:focus {
+}
+
+select.form-select:focus {
     box-shadow: none;
     border-color: #6c757d;
-  }
-  .table-responsive {
+}
+
+.table-responsive {
     overflow-x: auto;
     max-width: 100%;
-  }
-  
-  .table td,
-  .table th {
+}
+
+.table td,
+.table th {
     white-space: nowrap;
     vertical-align: middle;
-  }
+}
 
-  table tbody tr {
+table tbody tr {
     transition: all 0.2s ease;
     border-radius: 12px;
-  }
-  
-  table tbody tr:hover {
-    background-color: #2a2a2a;
-  }
+}
 
-  .row-custom {
+table tbody tr:hover {
+    background-color: #2a2a2a;
+}
+
+.row-custom {
     border: 1px solid #444;
     border-radius: 12px;
-  }
+}
 
 @media(max-width:575px) {
     .container {
