@@ -1,71 +1,63 @@
-import React from 'react'
-import "./Charger.css"
-export const ChargerTable = () => {
-  return (
-    <>
-    <div class="container rounded mt-5 bg-white p-md-5">
-    <div class="h2 font-weight-bold">Meetings</div>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-blue">
-                    <td class="pt-2"> <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="rounded-circle" alt=""/>
-                        <div class="pl-lg-5 pl-md-3 pl-1 name">Emilia Kollette</div>
-                    </td>
-                    <td class="pt-3 mt-1">25 Sep 2020</td>
-                    <td class="pt-3">11:00 AM</td>
-                    <td class="pt-3"><span class="fa fa-check pl-3"></span></td>
-                    <td class="pt-3"><span class="fa fa-ellipsis-v btn"></span></td>
-                </tr>
-                <tr id="spacing-row">
-                    <td></td>
-                </tr>
-                <tr class="bg-blue">
-                    <td class="pt-2"> <img src="https://images.pexels.com/photos/3765114/pexels-photo-3765114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="rounded-circle" alt=""/>
-                        <div class="pl-lg-5 pl-md-3 pl-1 name">Anny Adams</div>
-                    </td>
-                    <td class="pt-3">26 Sep 2020</td>
-                    <td class="pt-3">11:00 AM</td>
-                    <td class="pt-3"><span class="fa fa-check pl-3"></span></td>
-                    <td class="pt-3"><span class="fa fa-ellipsis-v btn"></span></td>
-                </tr>
-                <tr id="spacing-row">
-                    <td></td>
-                </tr>
-                <tr class="bg-blue">
-                    <td class="pt-2"> <img src="https://images.pexels.com/photos/3779448/pexels-photo-3779448.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="rounded-circle" alt="" />
-                        <div class="pl-lg-5 pl-md-3 pl-1 name">Arnold Linn</div>
-                    </td>
-                    <td class="pt-3">26 Sep 2020</td>
-                    <td class="pt-3">02:00 PM</td>
-                    <td class="pt-3"><span class="fa fa-check pl-3"></span></td>
-                    <td class="pt-3"><span class="fa fa-ellipsis-v btn"></span></td>
-                </tr>
-                <tr id="spacing-row">
-                    <td></td>
-                </tr>
-                <tr class="bg-blue">
-                    <td class="pt-2"> <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="rounded-circle" alt="" />
-                        <div class="pl-lg-5 pl-md-3 pl-1 name">Josh Limosel</div>
-                    </td>
-                    <td class="pt-3">26 Sep 2020</td>
-                    <td class="pt-3">04:00 PM</td>
-                    <td class="pt-3"><span class="fa fa-minus pl-3"></span></td>
-                    <td class="pt-3"><span class="fa fa-ellipsis-v btn"></span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-    </>
-  )
-}
+import React from "react";
+import { Trash2 } from "lucide-react";
+import "./Charger.css";
 
+const statusIcons = {
+  offline: "⛔",
+  online: "✅",
+  charging: "⚡",
+  ready: "🔋",
+  fault: "❗",
+};
+
+const ChargerTable = ({ chargers, onUpdateStatus, onRemove }) => {
+  return (
+    <div className="container-fluid px-4">
+      <table className="table table-dark table-striped table-hover border border-secondary shadow-sm rounded text-center">
+        <thead className="table-light text-dark">
+          <tr>
+            <th style={{ width: "25%" }}>Charger ID</th>
+            <th style={{ width: "20%" }}>Status</th>
+            <th style={{ width: "35%" }}>Change Status</th>
+            <th style={{ width: "20%" }}>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {chargers.map(({ id, status }) => (
+            <tr key={id}>
+              <td>{id.slice(0, 8)}...</td>
+              <td className="fw-bold">{statusIcons[status]} {status.toUpperCase()}</td>
+              <td>
+              <select
+  className="form-select bg-secondary text-white border-0 py-1 text-center"
+  value={status}
+  onChange={(e) => onUpdateStatus(id, e.target.value)}
+>
+  {Object.keys(statusIcons).map((s) => (
+    <option key={s} value={s} className="text-center">
+      {s.charAt(0).toUpperCase() + s.slice(1)}
+    </option>
+  ))}
+</select>
+              </td>
+              <td>
+                <button className="btn btn-outline-danger" onClick={() => onRemove(id)}>
+                  <Trash2 size={18} />
+                </button>
+              </td>
+            </tr>
+          ))}
+          {chargers.length === 0 && (
+            <tr>
+              <td colSpan="4" className="text-muted py-5">
+                No chargers added yet. Click <strong>"Add Charger"</strong> to begin.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default ChargerTable;

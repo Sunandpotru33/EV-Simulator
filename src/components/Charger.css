@@ -4,11 +4,7 @@
     box-sizing: border-box
 }
 
-body {
-    background-color: #d9ecf2;
-    font-family: 'Poppins', sans-serif;
-    color: #666
-}
+
 
 .h2 {
     color: #444;
@@ -71,6 +67,42 @@ img {
 #spacing-row {
     height: 10px
 }
+.table td,
+.table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+select.form-select:focus {
+  box-shadow: none;
+  border-color: #6c757d;
+}
+
+.table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+  
+  select.form-select:focus {
+    box-shadow: none;
+    border-color: #6c757d;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  .table td,
+  .table th {
+    white-space: nowrap;
+    vertical-align: middle;
+  }
 
 @media(max-width:575px) {
     .container {
