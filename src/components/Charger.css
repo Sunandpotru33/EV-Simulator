@@ -104,6 +104,20 @@ select.form-select:focus {
     vertical-align: middle;
   }
 
+  table tbody tr {
+    transition: all 0.2s ease;
+    border-radius: 12px;
+  }
+  
+  table tbody tr:hover {
+    background-color: #2a2a2a;
+  }
+
+  .row-custom {
+    border: 1px solid #444;
+    border-radius: 12px;
+  }
+
 @media(max-width:575px) {
     .container {
         width: 125%;

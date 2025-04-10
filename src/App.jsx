@@ -16,8 +16,16 @@ const App = () => {
     localStorage.setItem("ev_chargers", JSON.stringify(chargers));
   }, [chargers]);
 
+  useEffect(() => {
+    localStorage.setItem("ev_chargers", JSON.stringify(chargers));
+  }, [chargers]);
+
+  const generateShortId = () => {
+    return "CHG-" + Math.random().toString(36).substr(2, 6).toUpperCase();
+  };
+  
   const addCharger = () => {
-    setChargers([...chargers, { id: uuidv4(), status: "offline" }]);
+    setChargers([...chargers, { id: generateShortId(), status: "offline" }]);
   };
 
   const updateStatus = (id, status) => {
