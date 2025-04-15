@@ -2,7 +2,7 @@ import React from "react";
 import { Trash2 } from "lucide-react";
 import "./Charger.css";
 
-const statusIcons = {
+const statusIcons: Record<string, string> = {
   offline: "⛔",
   online: "✅",
   charging: "⚡",
@@ -10,48 +10,41 @@ const statusIcons = {
   fault: "❗",
 };
 
-const ChargerTable = ({ chargers, onUpdateStatus, onRemove }) => {
+interface Charger {
+  id: string;
+  status: string;
+}
+
+interface ChargerTableProps {
+  chargers: Charger[];
+  onUpdateStatus: (id: string, status: string) => void;
+  onRemove: (id: string) => void;
+}
+
+const ChargerTable: React.FC<ChargerTableProps> = ({ chargers, onUpdateStatus, onRemove }) => {
   return (
     <div className="container-fluid px-4">
-      <table
-        className="table table-dark table-hover shadow-sm text-center"
-        style={{ borderCollapse: "separate", borderSpacing: "0 12px" }}
-      >
-        <thead style={{ backgroundColor: "#000", color: "#fff" }}>
+      <table className="table table-dark table-hover text-center">
+        <thead>
           <tr>
-            <th style={{ width: "40%" }}>Charger ID</th>
-            <th style={{ width: "40%" }}>Change Status</th>
-            <th style={{ width: "20%" }}>Remove</th>
+            <th className="table-th-40" >Charger ID</th>
+            <th className="table-th-40" >Change Status</th>
+            <th className="table-th-20" >Remove</th>
           </tr>
         </thead>
         <tbody>
           {chargers.map(({ id, status }) => (
-            <tr
-
-              key={id}
-              style={{
-                border: "1px solid #444",
-                borderRadius: "12px",
-                overflow: "hidden",
-
-                backgroundColor: "#212529", color: "#fff", backgroundColor: "#212529 !important"
-              }}
-            >
+            <tr key={id}>
               <td className="align-middle">{id}</td>
               <td>
                 <select
                   className="form-select bg-dark text-white border-1 text-center"
-                  style={{
-                    padding: "4px 8px",
-                    fontSize: "0.9rem",
-                    width: "180px",
-                    margin: "auto"
-                  }}
                   value={status}
                   onChange={(e) => onUpdateStatus(id, e.target.value)}
+                  aria-label={`Change status of charger ${id}`}
                 >
                   {Object.keys(statusIcons).map((s) => (
-                    <option key={s} value={s} style={{ padding: "6px", textAlign: "left" }}>
+                    <option key={s} value={s}>
                       {`${statusIcons[s]}  ${s.charAt(0).toUpperCase() + s.slice(1)}`}
                     </option>
                   ))}
@@ -60,8 +53,8 @@ const ChargerTable = ({ chargers, onUpdateStatus, onRemove }) => {
               <td>
                 <button
                   className="btn btn-outline-danger"
-                  style={{ border: "none", background: "transparent" }}
                   onClick={() => onRemove(id)}
+                  aria-label={`Remove charger ${id}`}
                 >
                   <Trash2 size={18} />
                 </button>
@@ -70,7 +63,7 @@ const ChargerTable = ({ chargers, onUpdateStatus, onRemove }) => {
           ))}
           {chargers.length === 0 && (
             <tr>
-              <td colSpan="3" className="text-muted py-5">
+              <td colSpan={3} className="text-muted py-5">
                 No chargers added yet. Click <strong>"Add Charger"</strong> to begin.
               </td>
             </tr>

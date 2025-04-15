@@ -40,3 +40,13 @@
   width: 100vw;
   overflow-x: hidden;
 }
+
+.react-confirm-alert-overlay{
+  background: none !important;
+}
+
+.react-confirm-alert-body{
+  h1{
+    font-size: 2.5rem;
+  }
+}
